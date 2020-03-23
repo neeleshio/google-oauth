@@ -2,6 +2,25 @@ const passport = require('passport');
 const GoogleTokenStrategy = require('passport-google-plus-token');
 const User = require('./models/User');
 const oath = require('./config/oath');
+const JwtStrategy = require('passport-jwt').Strategy;
+const { ExtractJwt } = require('passport-jwt');
+
+passport.use(new JwtStrategy({
+    jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+    secretOrKey: oath.JWT_SECRET
+}, async (payload, done) => {
+    try {
+        const user = await User.findOne({ where: { id: payload.sub } });
+        if (!user) {
+            return done(null, false);
+        }
+        done(null, user);
+    }
+    catch (error) {
+        done(error, false);
+    }
+}));
+
 
 passport.use('googleToken', new GoogleTokenStrategy({
     clientID: 'oath.google.clientID',

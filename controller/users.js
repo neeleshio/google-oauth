@@ -15,6 +15,11 @@ module.exports = {
   googleOAuth: async (req, res, next) => {
     const token = signToken(req.user);
     res.status(200).json({ token });
+  },
+
+  // Test JWT strategy
+  secret: async (req, res, next) => {
+    res.status(200).json({ secret: "Its Working" });
   }
 };
 
