@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
-module.exports = new Sequelize('postgres', 'postgres', 'novasemita', {
-    host: 'testdblh.cz2grr6g2ufx.us-east-1.rds.amazonaws.com',
+module.exports = new Sequelize('database', 'username', 'password', {
+    host: '',
     dialect: 'postgres'
 });
 
