@@ -1,5 +1,5 @@
 module.exports = {
-    JWT_SECRET: 'livingheritageauth',
+    JWT_SECRET: 'secret',
     google: {
         clientID: '',
         clientSecret: ''
